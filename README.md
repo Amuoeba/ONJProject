@@ -16,7 +16,7 @@ The task proposes subdivision of in to 3 subtasks:
     1. On automatically anotated data (noisy)
 1. Relation extraction and classification
 
-It allso provides an evaluation framework which enables us to see how individual steps solutions impact the overall performance of relation classification. Next we will explore subtasks, data and evaluation procedure in more detail.
+It allso provides an evaluation framework which enables us to see how individual steps solutions impact the overall performance of relation classification. Next we will explore **subtasks, data and evaluation procedure** in more detail.
 
 ### Data
 The training data is given as 2 sets of 350 abstracts in a anotated **XML** format with a coresponding list of relation data
@@ -97,6 +97,7 @@ use a
 <entity id="H01-1001.6">histogram</entity>
 ```
 Each part of text that coresponds to a single entity is enclosed in the _"<entity></entity>"_ tag. In manualy anotated set these entities are determined by humans in automatically anotated set they are determined by an algorithm. Each abstract and entity have their own identification numbers _H01-1001_ for the abstract in the above example and _H01-1001.1_ for the first entity found in this abstract. The list of relations between entities defines the relation type and entities involved in the relation. The exact format can be seen below:
+```txt
 USAGE(H01-1001.5,H01-1001.7,REVERSE)
 USAGE(H01-1001.9,H01-1001.10)
 PART_WHOLE(H01-1001.14,H01-1001.15,REVERSE)
@@ -110,4 +111,27 @@ MODEL-FEATURE(H01-1042.10,H01-1042.11)
 PART_WHOLE(H01-1049.3,H01-1049.4,REVERSE)
 RESULT(H01-1058.2,H01-1058.4)
 RESULT(H01-1058.9,H01-1058.10)
-    
+```
+
+### Evaluation
+Evaluation for this task is specified for each subtask seperately
+#### Subtask 1.1 and 1.2
+Tasks 1.1 and 1.2 are classification taks. The folowing class-based evaluation metrices will be used:
+* for every distinct class: precision, recall and F1-measure (β=1)
+* global evaluation, for the set of classes:
+    * macro-average of the F1-measures of every distinct class
+    * micro-average of the F1-measures of every distinct class
+#### Subtask 2 
+For the relation extraction and classification task the folowing evaluations will be preformed:
+* precision:percentage of pairs of entities that were correctly connected (directionality and relation labels are ignored)
+* recall: percentage of pairs of entities connected in the gold standard that were found (directionality and relation labels are ignored)
+* F1-score (β=1): harmonic mean of precision and recall.
+
+
+### Subtasks
+#### 1.1 and 1.2
+Subtasks 1.1 and 1.2 are relation classification tasks. Goal hear will be to correctly classify a relation which connects two entities. For example we are given the data that entities **_(H01-1041.8, H01-1041.9)_** are in a relation, the goal then is to classify this relation as one of the predefined relations like **_USAGE(H01-1041.8, H01-1041.9)_** for example.
+#### 2
+Subtask 2 is a combination of relation extraction and classification. The clasification part is same as in subtask 1.1 and 1.2. The goal of relation extraction task is to produce pairs of entities with relation type set to "ANY" like this:
+
+**_ANY(H01-1041.8, H01-1041.9)_**
