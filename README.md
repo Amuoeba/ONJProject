@@ -132,7 +132,7 @@ For the relation extraction and classification task the folowing evaluations wil
 #### 1.1 and 1.2
 Subtasks 1.1 and 1.2 are relation classification tasks. Goal hear will be to correctly classify a relation which connects two entities. For example we are given the data that entities **_(H01-1041.8, H01-1041.9)_** are in a relation, the goal then is to classify this relation as one of the predefined relations like **_USAGE(H01-1041.8, H01-1041.9)_** for example.
 #### 2
-Subtask 2 is a combination of relation extraction and classification. The clasification part is same as in subtask 1.1 and 1.2. The goal of relation extraction task is to produce pairs of entities with relation type set to "ANY" like this:
+Subtask 2 is a combination of relation extraction and classification. The clasification part is same as in subtask 1.1 and 1.2. The goal of relation extraction task is to produce pairs of entities with relation type set to "ANY" (example below) from the anotated entities in the abstract text.
 
 **_ANY(H01-1041.8, H01-1041.9)_**
 
