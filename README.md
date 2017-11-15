@@ -135,3 +135,10 @@ Subtasks 1.1 and 1.2 are relation classification tasks. Goal hear will be to cor
 Subtask 2 is a combination of relation extraction and classification. The clasification part is same as in subtask 1.1 and 1.2. The goal of relation extraction task is to produce pairs of entities with relation type set to "ANY" like this:
 
 **_ANY(H01-1041.8, H01-1041.9)_**
+
+### Initial Idea
+My initial plan is to enrich words in abstracts with a semantic meaning. For that I want to experiment with an approach presented by Cortical.io. They are using a corpus of wikipedia articles, to formulate a semantic fingerprint for each word. 
+In these semantic fingerprints unique clusters form for a word given the context we observe it in. I would like to try and pair words with similar semantic fingerprints to extract relations, which are higher level concepts and should be obsereved in semantic finger print to some extent.
+I plan to use the Wikipedia corpus because Cortical.io is using it as well and in addition to that it contains a lot of scientific data and concepts. I will probably allso experiment with Googles relation extraction corpus, because it was created with exactly this intent - to help research relation extraction from unstructured text.
+
+
