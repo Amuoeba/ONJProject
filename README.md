@@ -141,4 +141,15 @@ My initial plan is to enrich words in abstracts with a semantic meaning. For tha
 In these semantic fingerprints unique clusters form for a word given the context we observe it in. I would like to try and pair words with similar semantic fingerprints to extract relations, which are higher level concepts and should be obsereved in semantic finger print to some extent.
 I plan to use the Wikipedia corpus because Cortical.io is using it as well and in addition to that it contains a lot of scientific data and concepts. I will probably allso experiment with Googles relation extraction corpus, because it was created with exactly this intent - to help research relation extraction from unstructured text.
 
+**Links of interest:**
+
+[Cortical.io](http://www.cortical.io/technology.html)
+
+[Google relation extraction corpus](https://research.googleblog.com/2013/04/50000-lessons-on-how-to-read-relation.html)
+
+[Wiki corpus](https://corpus.byu.edu/wiki/)
+
+[A review of Relation Extraction](chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/http://www.cs.cmu.edu/~nbach/papers/A-survey-on-Relation-Extraction.pdf)
+
+[Stanford relation extraction](chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://web.stanford.edu/class/cs224u/materials/cs224u-2016-relation-extraction.pdf)
 
