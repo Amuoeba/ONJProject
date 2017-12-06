@@ -51,10 +51,13 @@ class Preprocess():
             return linesByArticle
       
       def CreateArticles(self):
+            """Create a list of Article classes"""
             Abstracts = []
             for article in self.LinesByArticle:
                   atributes = re.search('<text(.*?)>(.*?)<title>(.*?)<\/title>(.*?)<\/text>',article)
-                  abstract = Abstract(atributes.group(1),atributes.group(3),atributes.group(4))
+                  text = atributes.group(4)
+                  text = re.sub('(<abstract>|<\/abstract>)','',text)
+                  abstract = Abstract(atributes.group(1),atributes.group(3),text)
                   Abstracts.append(abstract)
             return Abstracts
             
