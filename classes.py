@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 class Abstract():
-      def __init__(self,title,text):
+      def __init__(self,ID,title,text):
             self.title = title
             self.text = text
-            self.ID = None
+            self.ID = ID
       
