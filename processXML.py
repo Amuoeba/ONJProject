@@ -8,15 +8,15 @@ class Preprocess():
       
       def __init__(self,RawData):
             self.RawData = list(RawData)
-            self.RemoveNewLines()
+            self.remove_new_lines()
             self.Segmented =None
-            self.LinesByArticle = self.AssignLinesToArticle()
-            self.Articles = self.CreateArticles()
+            self.LinesByArticle = self.assign_lines_to_article()
+            self.Articles = self.create_articles()
             
             
             
       
-      def RemoveNewLines(self):
+      def remove_new_lines(self):
             new = []
             for line in enumerate(self.RawData):                        
                   stripped=line[1].strip("\n")
@@ -27,7 +27,7 @@ class Preprocess():
 #            segment = re.search('<text(.*?)>(.*?)<title>(.*?)<\/title>(.*?)<\/text>',self.Segmented)
 #            self.Segmented = segment
             
-      def AssignLinesToArticle(self):
+      def assign_lines_to_article(self):
             """Parses the initial xml to assign text to seperate articles"""
             data = list(self.RawData)
             linesByArticle = []            
@@ -50,7 +50,7 @@ class Preprocess():
                         data.pop(0)
             return linesByArticle
       
-      def CreateArticles(self):
+      def create_articles(self):
             """Create a list of Article classes"""
             Abstracts = []
             for article in self.LinesByArticle:
