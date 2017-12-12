@@ -12,6 +12,7 @@ class Abstract():
             self.cleanText = self.clean_text()
             self.SplitText = self.split_text()
             self.entities = self.find_entities()
+            self.relations = None
             
       def clean_text(self):
             cleaned = re.sub('(<.*?>|<\/.*?>)',' ',self.text)
@@ -20,12 +21,9 @@ class Abstract():
       
       def find_entities(self):
             entities = []
-            ent = re.findall("<entity id=\"(.*?)\">(.*?)<\/entity>",self.text)
-            
-            for i in ent:
-                  entity = Entity(i[0],i[1])
-                  entities.append(entity)
-            
+            for ele in self.SplitText:
+                  if isinstance(ele,Entity):
+                        entities.append(ele)            
             return entities
       
       def split_text(self):
@@ -75,6 +73,9 @@ class Abstract():
                          ele[1].set_after(afterList)             
              return None
       
+      def set_relations(self,relationsData):
+            
+      
       def _detiled_print_(self):
             for ele in self.SplitText:
                   if isinstance(ele,Entity):
@@ -117,6 +118,14 @@ class Word():
       def _to_string_(self):
              return self.word
 
+class Relation():
+      def __init__(self,Type,entityOne,entityTwo,reverse=False):
+            self.type = Type
+            self.entityOne = entityOne
+            self.entityTwo = entityTwo
+            self.reverse = reverse
+      
+      
 #
 #p = re.compile("<entity id=\"(.*?)\">(.*?)<\/entity>")
 #for m in p.finditer(a.text):
