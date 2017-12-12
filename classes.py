@@ -43,14 +43,48 @@ class Abstract():
                         for i in ent:
                               entity = Entity(i[0],i[1])
                               byWord.append(entity)
+            
+            self.set_surrounding(byWord,n=5)
+            
             return byWord
+      
+      def set_surrounding(self,wordList,n=5):
+             for ele in enumerate(wordList):
+                   if isinstance(ele[1],Entity):
+                         if ele[0] < n:
+                               beforeIndex = 0
+                         else:
+                               beforeIndex = ele[0]-(n-1)                         
+                         beforeList = []
+                         while (beforeIndex != ele[0]):
+                               beforeList.append(wordList[beforeIndex])
+                               beforeIndex += 1
+                         
+                         if len(wordList) - ele[0] <n:
+                               endIndex = len(wordList)-1
+                         else:
+                               endIndex = ele[0] + (n-1)
+                         
+                         afterList = []
+                         start = ele[0]
+                         while (start != endIndex):
+                               afterList.append(wordList[start + 1])
+                               start += 1
+                               
+                         ele[1].set_before(beforeList)
+                         ele[1].set_after(afterList)             
+             return None
       
       def _detiled_print_(self):
             for ele in self.SplitText:
                   if isinstance(ele,Entity):
                         print("Entity ID: ",ele.ID," String: ",ele.entity)
+                        print("Before: ",[x._to_string_() for x in ele.before])
+                        print("After: ",[x._to_string_() for x in ele.after])
+                        print("############################################\n")
                   elif isinstance(ele,Word):
                         print("Word: ",ele.word," POS tag: ",ele.posTag," WN representation: ",ele.WNRep)
+                        print("############################################\n")
                   else:
                         print("ERROR! at: ",ele)
       
@@ -60,12 +94,28 @@ class Entity():
        def __init__(self,ID,entity):
              self.ID = ID
              self.entity = entity
+             self.before = None
+             self.after = None
+             
+       def set_before(self,beforeList):
+             self.before = beforeList
+             
+       def set_after(self,afterList):
+             self.after = afterList
+             
+       def _to_string_(self):
+             return self.entity
+       
+		   
              
 class Word():
       def __init__(self,word):
             self.word = word
             self.posTag = nltk.pos_tag([self.word])
             self.WNRep = wn.synsets(self.word)
+            
+      def _to_string_(self):
+             return self.word
 
 #
 #p = re.compile("<entity id=\"(.*?)\">(.*?)<\/entity>")
