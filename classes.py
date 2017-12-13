@@ -4,6 +4,18 @@ from nltk.tokenize import TreebankWordTokenizer
 from nltk.corpus import wordnet as wn
 import nltk
 
+
+
+USAGE = "USAGE"
+PART_WHOLE = "PART_WHOLE"
+RESULT = "RESULT"
+MODEL_FEATURE = "MODEL-FEATURE"
+COMPARE = "COMPARE"
+TOPIC = "TOPIC"
+
+
+
+
 class Abstract():
       def __init__(self,ID,title,text):
             self.title = title
@@ -46,7 +58,7 @@ class Abstract():
             
             return byWord
       
-      def set_surrounding(self,wordList,n=5):
+      def set_surrounding(self,wordList,n=6):
              for ele in enumerate(wordList):
                    if isinstance(ele[1],Entity):
                          if ele[0] < n:
