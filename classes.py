@@ -20,10 +20,10 @@ class Abstract():
             return cleaned
       
       def find_entities(self):
-            entities = []
+            entities = {}
             for ele in self.SplitText:
                   if isinstance(ele,Entity):
-                        entities.append(ele)            
+                        entities[ele.ID] = ele           
             return entities
       
       def split_text(self):
@@ -74,20 +74,52 @@ class Abstract():
              return None
       
       def set_relations(self,relationsData):
-            
-      
-      def _detiled_print_(self):
-            for ele in self.SplitText:
-                  if isinstance(ele,Entity):
-                        print("Entity ID: ",ele.ID," String: ",ele.entity)
-                        print("Before: ",[x._to_string_() for x in ele.before])
-                        print("After: ",[x._to_string_() for x in ele.after])
-                        print("############################################\n")
-                  elif isinstance(ele,Word):
-                        print("Word: ",ele.word," POS tag: ",ele.posTag," WN representation: ",ele.WNRep)
-                        print("############################################\n")
+            regex = re.compile("(.*?)\((.*?),(.*),(.*?)\)|(.*?)\((.*?),(.*)\)")
+            relations = []
+            for line in relationsData:
+                  match = regex.match(line)
+                  if match.group(1):
+                        relationType = match.group(1)
+                        entity_1 = match.group(2)
+                        entity_2 = match.group(3)
+                        reverse = True
+                  elif match.group(5):
+                        relationType = match.group(5)
+                        entity_1 = match.group(6)
+                        entity_2 = match.group(7)
+                        reverse = False
                   else:
-                        print("ERROR! at: ",ele)
+                        print("False entry in relations data")
+                  
+                  
+                  if entity_1 in self.entities and entity_2 in self.entities :                        
+                        relation = Relation(relationType,self.entities[entity_1],self.entities[entity_2],reverse)
+                        relations.append(relation)
+            self.relations = relations
+            return None
+      
+      def _detiled_print_(self,part="relations"):
+            if part == "text":
+                  for ele in self.SplitText:
+                        if isinstance(ele,Entity):
+                              print("Entity ID: ",ele.ID," String: ",ele.entity)
+                              print("Before: ",[x._to_string_() for x in ele.before])
+                              print("After: ",[x._to_string_() for x in ele.after])
+                              print("############################################\n")
+                        elif isinstance(ele,Word):
+                              print("Word: ",ele.word," POS tag: ",ele.posTag," WN representation: ",ele.WNRep)
+                              print("############################################\n")
+                        else:
+                              print("ERROR! at: ",ele)
+            elif part == "relations":
+                  for rel in self.relations:
+                        print("RELATION")
+                        print("Type: ", rel.type)
+                        print("Ent 1: ", rel.entityOne.ID)
+                        print("Ent 2: ",rel.entityTwo.ID)
+                        print("Reverse: ",rel.reverse)
+            else:
+                  print("Wrong parameters")
       
 
 
