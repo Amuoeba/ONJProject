@@ -50,9 +50,7 @@ class RetinaRelationClassifier():
             return filters
       
       def test_filters(self,fingerprintFilters):
-            correct = 0
-            false = 0
-            total = 0
+            performance = {}
             
             for abstract in self.testData:
                    assert isinstance(abstract,classes.Abstract)
@@ -77,12 +75,27 @@ class RetinaRelationClassifier():
                         
                         prediction = max(predictions, key=lambda x:x[1])
                         
-                        if prediction[0] == relType:
-                              correct += 1
-                              total += 1
-                        else:
-                              false += 1
-                              total += 1
-                              
-            return (correct,false,total)
                         
+                        
+                        if relType not in performance:
+                              performance[relType] = (0,0,0)
+                              if prediction[0] == relType:
+                                    performance[relType] = (performance[relType][0]+1,
+                                               performance[relType][0],performance[relType][2]+1)
+                              else:
+                                    performance[relType] = (performance[relType][0],
+                                               performance[relType][0]+1,performance[relType][2]+1)
+                        else:
+                              if prediction[0] == relType:
+                                    performance[relType] = (performance[relType][0]+1,
+                                               performance[relType][0],performance[relType][2]+1)
+                              else:
+                                    performance[relType] = (performance[relType][0],
+                                               performance[relType][0]+1,performance[relType][2]+1)
+                              
+                              
+            return performance
+                        
+      
+      
+      
