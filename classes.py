@@ -54,7 +54,7 @@ class Abstract():
                               entity = Entity(i[0],i[1])
                               byWord.append(entity)
             
-            self.set_surrounding(byWord,n=5)
+            self.set_surrounding(byWord,n=6)
             
             return byWord
       
@@ -125,11 +125,16 @@ class Abstract():
                               print("ERROR! at: ",ele)
             elif part == "relations":
                   for rel in self.relations:
-                        print("RELATION")
-                        print("Type: ", rel.type)
-                        print("Ent 1: ", rel.entityOne.ID)
-                        print("Ent 2: ",rel.entityTwo.ID)
-                        print("Reverse: ",rel.reverse)
+                      ent1 = rel.entityOne
+                      ent2 = rel.entityTwo
+                      assert isinstance(ent1,Entity)
+                      assert isinstance(ent2,Entity)
+                      print("RELATION")
+                      print([x._to_string_() for x in ent1.before]," ",ent1._to_string_()," ",[x._to_string_() for x in ent1.after]," | ", [x._to_string_() for x in ent2.before]," ",ent2._to_string_()," ",[x._to_string_() for x in ent2.after])
+                      print("Type: ", rel.type)
+                      print("Ent 1: ", rel.entityOne.ID)
+                      print("Ent 2: ",rel.entityTwo.ID)
+                      print("Reverse: ",rel.reverse)
             else:
                   print("Wrong parameters")
       
@@ -151,7 +156,7 @@ class Entity():
        def _to_string_(self):
              return self.entity
        
-		   
+           
              
 class Word():
       def __init__(self,word):

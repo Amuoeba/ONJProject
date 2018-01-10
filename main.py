@@ -19,7 +19,7 @@ with open ("./Data/1/1.1.relations.txt") as relations:
 for abst in abstracts:
       abst.set_relations(relations)
 
-dataSplit=gt.SplitData(abstracts)
+dataSplit=gt.SplitData(abstracts,seed=1)
 
 
 train = dataSplit["train"]
