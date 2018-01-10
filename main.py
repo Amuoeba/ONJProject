@@ -26,10 +26,10 @@ train = dataSplit["train"]
 test = dataSplit["test"]
       
       
-retinaClassifier=sa.RetinaRelationClassifier(train,test)
-filters = retinaClassifier.create_filters()
-
-performance = retinaClassifier.test_filters(filters)
+#retinaClassifier=sa.RetinaRelationClassifier(train,test)
+#filters = retinaClassifier.create_filters()
+#
+#performance = retinaClassifier.test_filters(filters)
 
 
 

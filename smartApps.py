@@ -69,13 +69,14 @@ class RetinaRelationClassifier():
                         
                         predictions = []
                         
+                        
                         for fpFilter in fingerprintFilters:
                               score = LiteClient.compare(relationText,fingerprintFilters[fpFilter].positions)
                               predictions.append((fpFilter,score))
                         
                         prediction = max(predictions, key=lambda x:x[1])
                         
-                        
+                        print(prediction[0])
                         
                         if relType not in performance:
                               performance[relType] = (0,0,0)
