@@ -141,6 +141,27 @@ My initial plan is to enrich words in abstracts with a semantic meaning. For tha
 In these semantic fingerprints unique clusters form for a word given the context we observe it in. I would like to try and pair words with similar semantic fingerprints to extract relations, which are higher level concepts and should be obsereved in semantic finger print to some extent.
 I plan to use the Wikipedia corpus because Cortical.io is using it as well and in addition to that it contains a lot of scientific data and concepts. I will probably allso experiment with Googles relation extraction corpus, because it was created with exactly this intent - to help research relation extraction from unstructured text.
 
+## Running the script
+Make sure that the required packages are installed. Then you need to download Glove word embedings from:
+[GloVe](https://nlp.stanford.edu/projects/glove/) where you download the:
+Wikipedia 2014 + Gigaword 5 (6B tokens, 400K vocab, uncased, 50d, 100d, 200d, & 300d vectors, 822 MB download): glove.6B.zip
+You thenn need to extract the zip file in to a glove/ directory located in the root directory of the project.
+You should end up with the following structure concerning the GloVe word embeddings:
+projectRoot/glove/glove.6B.50d.txt glove.6B.100d.txt glove.6B.200d.txt glove.6B.300d.txt
+
+The scripts should then be able to run with executing the main.py and the working directory beeing set to the projects root.
+### Requirements to run the scripts
+
+torch==0.3.0.post4
+retinasdk==1.0.0
+torchwordemb==0.0.8
+numpy==1.13.3
+matplotlib==2.1.1
+nltk==3.2.4
+pandas==0.20.3
+scikit_learn==0.19.1
+
+
 **Links of interest:**
 
 [Cortical.io](http://www.cortical.io/technology.html)

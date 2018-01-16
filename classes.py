@@ -143,9 +143,10 @@ class Abstract():
 class Entity():
        def __init__(self,ID,entity):
              self.ID = ID
-             self.entity = entity
+             self.entity = entity.lower()
              self.before = None
              self.after = None
+             self.entitySplit = self.entity.split()
              
        def set_before(self,beforeList):
              self.before = beforeList
@@ -154,18 +155,49 @@ class Entity():
              self.after = afterList
              
        def _to_string_(self):
-             return self.entity
-       
+             return self.entity.lower()
+       def expand(self):
+           expanded = []
+           for i in self.before:
+               if isinstance(i,Word):
+                   s = i._to_string_()
+                   if s.isalpha():
+                       expanded.append(s)
+               if isinstance(i,Entity):
+                   s = i._to_string_()
+                   s = s.split()
+                   for j in s:
+                       if j.isalpha():
+                           expanded.append(j)
+           
+           for i in self.entity.split():
+               if i.isalpha():
+                   expanded.append(i)
+           
+           for i in self.after:
+               if isinstance(i,Word):
+                   s = i._to_string_()
+                   if s.isalpha():
+                       expanded.append(s)
+               if isinstance(i,Entity):
+                   s = i._to_string_()
+                   s = s.split()
+                   for j in s:
+                       if j.isalpha():
+                           expanded.append(j)
+
+           return expanded
+           
            
              
 class Word():
       def __init__(self,word):
-            self.word = word
+            self.word = word.lower()
             self.posTag = nltk.pos_tag([self.word])
             self.WNRep = wn.synsets(self.word)
             
       def _to_string_(self):
-             return self.word
+             return self.word.lower()
 
 class Relation():
       def __init__(self,Type,entityOne,entityTwo,reverse=False):
